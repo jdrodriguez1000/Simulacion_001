@@ -1,0 +1,96 @@
+{
+  "version": "1.0",
+  "description": "Catálogo de métricas del harness de gobernanza — 10 métricas estándar",
+  "metrics": [
+    {
+      "id": "M01",
+      "name": "cycle_time_days",
+      "description": "Días totales desde inicio de entrevista Fase 0 hasta aprobación humana",
+      "unit": "días",
+      "alert_threshold": 10,
+      "alert_direction": "above",
+      "applies_to": ["su", "brd", "bdd", "sad", "specdd"]
+    },
+    {
+      "id": "M02",
+      "name": "iteration_count",
+      "description": "Número de iteraciones synthesizer→evaluator antes de aprobación",
+      "unit": "iteraciones",
+      "alert_threshold": 3,
+      "alert_direction": "above",
+      "applies_to": ["su", "brd", "bdd", "sad", "specdd"]
+    },
+    {
+      "id": "M03",
+      "name": "final_score",
+      "description": "Score del su_evaluator en la versión aprobada (0.0 a 1.0)",
+      "unit": "score",
+      "alert_threshold": 0.75,
+      "alert_direction": "below",
+      "applies_to": ["su", "brd", "bdd", "sad", "specdd"]
+    },
+    {
+      "id": "M04",
+      "name": "gaps_criticos_at_needs_analysis",
+      "description": "Número de gaps CRITICOS detectados por su_needs_analyzer",
+      "unit": "gaps",
+      "alert_threshold": 1,
+      "alert_direction": "above_or_equal",
+      "applies_to": ["su", "brd"]
+    },
+    {
+      "id": "M05",
+      "name": "interview_phases_completed",
+      "description": "Número de fases de entrevista completadas (Fase 0, 1, 2, 2.T, 2.U)",
+      "unit": "fases",
+      "alert_threshold": 3,
+      "alert_direction": "below",
+      "applies_to": ["su"]
+    },
+    {
+      "id": "M06",
+      "name": "confidence_score",
+      "description": "Score de confianza del su_needs_analyzer (0.0 a 1.0)",
+      "unit": "score",
+      "alert_threshold": 0.80,
+      "alert_direction": "below",
+      "applies_to": ["su", "brd"]
+    },
+    {
+      "id": "M07",
+      "name": "stakeholders_interviewed",
+      "description": "Número de stakeholders distintos entrevistados (SPONSOR, TECNICO, USUARIO)",
+      "unit": "stakeholders",
+      "alert_threshold": 1,
+      "alert_direction": "below_or_equal",
+      "applies_to": ["su"]
+    },
+    {
+      "id": "M08",
+      "name": "cb_threshold_used",
+      "description": "Umbral del circuit breaker derivado de la complejidad del proyecto",
+      "unit": "iteraciones máximas",
+      "alert_threshold": null,
+      "alert_direction": null,
+      "applies_to": ["su", "brd", "bdd", "sad", "specdd"]
+    },
+    {
+      "id": "M09",
+      "name": "human_rejection_count",
+      "description": "Número de rechazos por el stakeholder humano en Fase 5",
+      "unit": "rechazos",
+      "alert_threshold": 1,
+      "alert_direction": "above_or_equal",
+      "applies_to": ["su", "brd", "bdd", "sad", "specdd"]
+    },
+    {
+      "id": "M10",
+      "name": "complexity_level",
+      "description": "Nivel de complejidad clasificado por P6-1 (low/medium/high)",
+      "unit": "nivel",
+      "alert_threshold": null,
+      "alert_direction": null,
+      "applies_to": ["su"]
+    }
+  ]
+}
