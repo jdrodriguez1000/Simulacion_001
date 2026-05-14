@@ -1,0 +1,21 @@
+{
+  "timestamp": "2026-05-14T00:15:02",
+  "status": "warning",
+  "checks": {
+    "state_files_valid": true,
+    "state_files_readable": false,
+    "git_available": false,
+    "governance_su_dir_exists": true,
+    "sprint_contract_exists": false,
+    "github_remote_configured": false,
+    "filesystem_consistent": true
+  },
+  "inconsistencies": [
+    "Archivo no encontrado: governance\\gov_progress.txt",
+    "Archivo no encontrado: governance\\gov_history.log",
+    "git status retornó código 128: fatal: not a git repository (or any of the parent directories): .git",
+    "governance/su/su_sprint_contract.md no existe (recuperable)",
+    "No hay remoto 'origin' configurado. Recomendado: git remote add origin https://github.com/<usuario>/<repo>.git"
+  ],
+  "recommended_action": "auto_repair_and_continue"
+}
