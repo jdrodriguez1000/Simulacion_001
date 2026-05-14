@@ -12,7 +12,7 @@
 | Documento objetivo | SU.md (Statement of Understanding) |
 | Harness activo | governance |
 | Fase de entrada | interview_phase1 |
-| Modo de ejecución | local (sin git, sin remoto) |
+| Modo de ejecución | git + GitHub habilitados (actualizado 2026-05-14) |
 
 ## Artefactos a producir
 
@@ -34,9 +34,9 @@
 
 ## Restricciones
 
-- Modo local: commits git y push no disponibles. Trazabilidad via gov_history.log.
-- github_remote_configured: false
-- git_available: false
+- git_available: true (actualizado 2026-05-14 tras git init por operador)
+- github_remote_configured: true — Remote: https://github.com/jdrodriguez1000/Simulacion_001.git
+- Commits y push habilitados. Trazabilidad via gov_history.log y GitHub.
 
 ---
 *Generado automáticamente por doc_orchestrator — template /su-sprint-contract-template*
