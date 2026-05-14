@@ -1,22 +1,32 @@
 {
   "su": {
     "status": "in_progress",
-    "phase": "interview_phase2U",
-    "checkpoint": "2.U.1_pendiente",
-    "next_action": "Iniciar Fase 2.U — entrevista con Laura Ríos (USUARIO, Analista de Retención)",
-    "next_question_section": "2.U.1",
+    "phase": "needs_analysis",
+    "iteration_count": 0,
+    "complexity": "high",
+    "complexity_signals": [
+      "multiples_decision_makers",
+      "alcance_multi_area",
+      "restricciones_legales",
+      "industria_regulada"
+    ],
+    "cb_threshold": 4,
     "completed_phases": [
       "fase_0_stakeholders",
       "fase_1_secciones_1.1_a_1.5",
       "fase_2_sponsor_secciones_2.1_a_2.8",
-      "fase_2T_tecnico_secciones_2.T.1_a_2.T.3"
+      "fase_2T_tecnico_secciones_2.T.1_a_2.T.3",
+      "fase_2U_usuario_secciones_2.U.1_a_2.U.2"
     ],
-    "stakeholders": {
-      "sponsor": {"nombre": "María González", "cargo": "Gerente de Retención de Clientes", "status": "entrevista_completada"},
-      "tecnico": {"nombre": "Carlos Méndez", "cargo": "Científico de Datos Senior", "status": "entrevista_completada"},
-      "usuario": {"nombre": "Laura Ríos", "cargo": "Analista de Retención", "status": "pendiente"}
-    },
-    "suspended_at": "2026-05-14",
-    "resume_note": "Retomar con Fase 2.U — preguntas a Laura Ríos sobre flujo de trabajo diario y requisitos de usuario"
+    "stakeholders_mapeados": [
+      {"nombre": "María González", "cargo": "Gerente de Retención de Clientes", "tipo": "SPONSOR", "disponible": true},
+      {"nombre": "Carlos Méndez", "cargo": "Científico de Datos Senior", "tipo": "TECNICO", "disponible": true},
+      {"nombre": "Laura Ríos", "cargo": "Analista de Retención", "tipo": "USUARIO", "disponible": true}
+    ],
+    "needs_analyzer_confidence": null,
+    "needs_analyzer_level": null,
+    "gaps_criticos": null,
+    "gaps_menores": null,
+    "gaps_ausentes": null
   }
 }

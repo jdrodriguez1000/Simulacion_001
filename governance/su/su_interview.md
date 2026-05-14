@@ -431,9 +431,57 @@ Para el proceso maduro sí — ETL completo tomará 90-120 minutos una vez optim
 
 ---
 
+## FASE 2.U — Entrevista de usuario final [COMPLETADO 2026-05-14 22:30]
+
+### 2.U.1 Flujo de trabajo y necesidades operativas del usuario final [COMPLETADO 2026-05-14 22:30]
+
+#### 2.U.1.1 Flujo de trabajo actual [COMPLETADO 2026-05-14 22:30]
+
+**Pregunta:** ¿Cómo es tu flujo de trabajo actual día a día para gestionar clientes en riesgo? ¿Qué herramientas usas y cuánto tiempo te toman las distintas actividades?
+
+**Respuesta:** Hoy empiezo revisando la cola de cancelaciones del día anterior en el CRM — son clientes que llamaron para cancelar o dejaron queja formal. Los priorizo por antigüedad y monto de factura, y empiezo a llamar. Si termino esa cola, paso a clientes con quejas abiertas sin resolución. No tenemos una lista de "clientes en riesgo" como tal — reaccionamos a lo que ya pasó. Al final del día registro el resultado de cada llamada en el CRM: retenido, canceló igual, no contestó, requiere seguimiento. Eso nos toma entre 4 y 5 horas de las 8 que trabajamos.
+
+**Informante:** Laura Ríos (USUARIO)
+
+---
+
+#### 2.U.1.2 Información que necesita por cliente [COMPLETADO 2026-05-14 22:30]
+
+**Pregunta:** ¿Qué información necesitas saber sobre un cliente antes de llamarlo? ¿Qué datos te faltan hoy?
+
+**Respuesta:** Para preparar la llamada necesito saber: cuánto tiempo lleva con nosotros, qué plan tiene y cuánto paga, si ha llamado al soporte recientemente y por qué, y si tiene retrasos en pagos. Con eso ya puedo decidir qué tono usar y qué oferta tiene sentido. Lo que me falta siempre es el historial de uso — si el cliente bajó mucho su consumo, eso me dice que ya no nos está usando aunque siga pagando, y ese es el peor caso porque cancela sin avisar. Hoy tengo que pedirle ese dato a Carlos si lo necesito, lo cual no es práctico.
+
+**Informante:** Laura Ríos (USUARIO)
+
+---
+
+### 2.U.2 Requisitos de la interfaz y fricciones actuales [COMPLETADO 2026-05-14 22:30]
+
+#### 2.U.2.1 Cómo presentar la lista [COMPLETADO 2026-05-14 22:30]
+
+**Pregunta:** Si el sistema te entregara una lista de clientes en riesgo cada semana, ¿cómo necesitarías ver esa información para que sea útil en tu trabajo diario?
+
+**Respuesta:** Necesito ver en la lista: nombre del cliente, número de teléfono de contacto, plan contratado, monto mensual, y las razones por las que está en riesgo en lenguaje claro — no un número, sino algo como "bajó su consumo 40%" o "tres llamadas al soporte este mes". También necesito una columna para registrar el resultado de la llamada o al menos una nota. El orden ideal es por nivel de riesgo de mayor a menor, pero también quiero poder filtrar por monto — prefiero atender primero a los clientes de mayor valor. Y que sea exportable a Excel para que cada agente trabaje su segmento sin que nos pisemos.
+
+**Informante:** Laura Ríos (USUARIO)
+
+---
+
+#### 2.U.2.2 Fricciones actuales que no quiere repetir [COMPLETADO 2026-05-14 22:30]
+
+**Pregunta:** ¿Cuáles son las mayores fricciones con las herramientas que usas hoy? ¿Qué no quieres que se repita en el nuevo sistema?
+
+**Respuesta:** Lo que más me frustra hoy es tener que abrir tres sistemas distintos para armar el contexto de un solo cliente: el CRM para datos básicos, otro sistema para ver facturas, y tengo que pedirle a Carlos el historial de uso. Si la nueva herramienta me pone todo eso junto en una sola pantalla ya es un avance enorme. Lo otro que no quiero es que sea lento — el CRM actual tarda a veces 20 o 30 segundos en cargar un cliente, y cuando tienes 40 llamadas por hacer eso mata el ritmo. Y por favor que funcione bien en Chrome, porque IE11 tiene problemas constantemente con el CRM actual.
+
+**Informante:** Laura Ríos (USUARIO)
+
+---
+
 ## Metadata
 - Fecha Fase 0: 2026-05-14
 - Fecha Fase 1: 2026-05-14 (completada)
 - Fecha Fase 2 con SPONSOR: 2026-05-14 (completada a las 20:45)
+- Fecha Fase 2.T con TECNICO: 2026-05-14 (completada a las 21:45)
+- Fecha Fase 2.U con USUARIO: 2026-05-14 (completada a las 22:30)
 - Complejidad clasificada: HIGH (leer gov_state.json para confirmar)
 - Señales de complejidad detectadas: Múltiples sistemas, migración de CRM, datos distribuidos, requiere validación técnica
