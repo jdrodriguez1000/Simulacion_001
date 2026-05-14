@@ -32,3 +32,6 @@
 [2026-05-14 22:45] doc_auditor: auditoría completada. 9/9 secciones presentes. 0 CRA. 0 contradicciones. 2 gaps MENORES documentados. su_audit_v1.md creado. su_review.md fusionado con sección de auditoría.
 [2026-05-14 22:45] doc_orchestrator: su_evaluator completó v1. Score: 0.919. Veredicto: APROBADO. doc_auditor: 0 gaps CRITICOS, 2 MENORES, 0 contradicciones, 0 CRA. su_review.md fusionado con ambas secciones.
 [2026-05-14 22:45] doc_orchestrator: gov_state.json actualizado a phase=human_approval. Pendiente aprobación del stakeholder sobre su_draft_v1.md.
+[2026-05-14 22:46] doc_orchestrator: Push a origin: ok — SU Draft v1 evaluated (hash: a16b408). Dashboard actualizado: 6 artefactos, 34 eventos. Harness en pausa esperando aprobación humana (Fase 5).
+[2026-05-14 22:50] doc_orchestrator: SU.md aprobado por María González (SPONSOR). Score final: 0.919. su_approved.md creado en governance/su/su_approved.md. gov_state.json actualizado a su.status=approved, su.phase=approved. BRD agregado a gov_state.json con status=pending. Commit pendiente.
+[2026-05-14 22:50] doc_orchestrator: commit git ejecutado: 'SU APPROVED by stakeholder'. Harness SU.md completado. Iniciando harness_director para métricas del ciclo.

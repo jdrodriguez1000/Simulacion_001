@@ -1,8 +1,11 @@
 {
   "su": {
-    "status": "in_progress",
-    "phase": "human_approval",
+    "status": "approved",
+    "phase": "approved",
     "current_draft": "governance/su/su_draft_v1.md",
+    "approved_path": "governance/su/su_approved.md",
+    "approved_date": "2026-05-14",
+    "final_score": 0.919,
     "iteration_count": 1,
     "complexity": "high",
     "complexity_signals": [
@@ -30,5 +33,9 @@
     "gaps_criticos": 0,
     "gaps_menores": 3,
     "gaps_ausentes": 0
+  },
+  "brd": {
+    "status": "pending",
+    "phase": null
   }
 }
