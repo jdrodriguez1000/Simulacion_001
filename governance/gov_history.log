@@ -34,4 +34,6 @@
 [2026-05-14 22:45] doc_orchestrator: gov_state.json actualizado a phase=human_approval. Pendiente aprobación del stakeholder sobre su_draft_v1.md.
 [2026-05-14 22:46] doc_orchestrator: Push a origin: ok — SU Draft v1 evaluated (hash: a16b408). Dashboard actualizado: 6 artefactos, 34 eventos. Harness en pausa esperando aprobación humana (Fase 5).
 [2026-05-14 22:50] doc_orchestrator: SU.md aprobado por María González (SPONSOR). Score final: 0.919. su_approved.md creado en governance/su/su_approved.md. gov_state.json actualizado a su.status=approved, su.phase=approved. BRD agregado a gov_state.json con status=pending. Commit pendiente.
-[2026-05-14 22:50] doc_orchestrator: commit git ejecutado: 'SU APPROVED by stakeholder'. Harness SU.md completado. Iniciando harness_director para métricas del ciclo.
+[2026-05-14 22:50] doc_orchestrator: commit git ejecutado: 'SU APPROVED by stakeholder' (hash: e21e4a9). Push a origin: ok — master -> origin/master. Harness SU.md completado. Iniciando harness_director para métricas del ciclo.
+[2026-05-14 22:55] harness_director: métricas del ciclo SU.md calculadas. 10 métricas totales: 8 OK, 0 alertas, 2 informativas. su_metrics.json escrito en governance/su/su_metrics.json. gov_metrics_report.md escrito en governance/gov_metrics_report.md. Salud general: EXCELENTE.
+[2026-05-14 22:55] doc_orchestrator: harness_director completó. su_metrics.json generado. Alertas: 0. BRD marcado como siguiente documento pendiente en gov_state.json.

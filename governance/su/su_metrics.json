@@ -1,0 +1,86 @@
+{
+  "document": "SU.md",
+  "approved_date": "2026-05-14",
+  "approved_by": "María González (SPONSOR)",
+  "calculated_by": "harness_director",
+  "calculated_at": "2026-05-14 22:55",
+  "metrics": {
+    "M01_cycle_time_days": {
+      "value": 1,
+      "unit": "días",
+      "alert_threshold": 10,
+      "status": "OK",
+      "note": "Ciclo completado en una sola jornada (2026-05-14)"
+    },
+    "M02_iteration_count": {
+      "value": 1,
+      "unit": "iteraciones",
+      "alert_threshold": 3,
+      "status": "OK",
+      "note": "Aprobado en primera iteración synthesizer→evaluator"
+    },
+    "M03_final_score": {
+      "value": 0.919,
+      "unit": "score",
+      "alert_threshold": 0.75,
+      "status": "OK",
+      "note": "Score su_evaluator en su_draft_v1.md — todas las dimensiones > 0.6"
+    },
+    "M04_gaps_criticos_at_needs_analysis": {
+      "value": 0,
+      "unit": "gaps",
+      "alert_threshold": 1,
+      "status": "OK",
+      "note": "0 gaps CRITICOS, 3 MENORES, 0 AUSENTES en su_knowledge_gaps.md"
+    },
+    "M05_interview_phases_completed": {
+      "value": 5,
+      "unit": "fases",
+      "alert_threshold": 3,
+      "status": "OK",
+      "note": "Fases completadas: Fase 0 (stakeholders), Fase 1 (SPONSOR), Fase 2 (SPONSOR), Fase 2.T (TECNICO), Fase 2.U (USUARIO)"
+    },
+    "M06_confidence_score": {
+      "value": 0.91,
+      "unit": "score",
+      "alert_threshold": 0.80,
+      "status": "OK",
+      "note": "LISTO — umbral HIGH (0.85) superado. Síntesis directa sin rondas adicionales."
+    },
+    "M07_stakeholders_interviewed": {
+      "value": 3,
+      "unit": "stakeholders",
+      "alert_threshold": 1,
+      "status": "OK",
+      "note": "SPONSOR: María González, TECNICO: Carlos Méndez, USUARIO: Laura Ríos"
+    },
+    "M08_cb_threshold_used": {
+      "value": 4,
+      "unit": "iteraciones máximas",
+      "alert_threshold": null,
+      "status": "INFORMATIVO",
+      "note": "cb_threshold=4 derivado de complexity=high. Solo se usó 1 de 4 iteraciones disponibles."
+    },
+    "M09_human_rejection_count": {
+      "value": 0,
+      "unit": "rechazos",
+      "alert_threshold": 1,
+      "status": "OK",
+      "note": "Aprobado por el stakeholder en primera presentación (Fase 5)"
+    },
+    "M10_complexity_level": {
+      "value": "high",
+      "unit": "nivel",
+      "alert_threshold": null,
+      "status": "INFORMATIVO",
+      "note": "Señales P6-1 detectadas: multiples_decision_makers, alcance_multi_area, restricciones_legales, industria_regulada"
+    }
+  },
+  "summary": {
+    "total_metrics": 10,
+    "ok_count": 8,
+    "alert_count": 0,
+    "informative_count": 2,
+    "overall_health": "EXCELENTE"
+  }
+}
