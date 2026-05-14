@@ -355,7 +355,7 @@
 
 ---
 
-## FASE 2.T — Entrevista técnica [EN CURSO]
+## FASE 2.T — Entrevista técnica [COMPLETADO 2026-05-14 21:45]
 
 ### 2.T.1 Estructura y volumen de datos [COMPLETADO 2026-05-14 21:30]
 
@@ -381,15 +381,53 @@
 
 ---
 
-### 2.T.2 Calidad y completitud de datos [PENDIENTE]
+### 2.T.2 Calidad y completitud de datos [COMPLETADO 2026-05-14 00:42]
 
 **Pregunta:** ¿Cuáles son los problemas específicos de calidad de datos? ¿Qué lagunas temporales o incompletetud hay en cada fuente?
 
-**Nota para operador:** Esta es la siguiente pregunta. Carlos ya ha identificado algunos problemas en 2.T.1 (duplicados en CRM, motivos texto libre, laguna de 6 semanas). Ahora necesitamos su evaluación detallada de qué tan solucionable es cada problema y cuál es el impacto en la capacidad de entrenar el modelo.
+**Respuesta:**
+
+**2.T.2.1 Duplicados en CRM**
+Manejable. Lógica propuesta: consolidar por id_cliente tomando la línea con mayor antigüedad como registro maestro, y agregar las líneas adicionales como atributo (número de líneas contratadas). El campo 'número de líneas' puede ser un feature útil — clientes con múltiples líneas probablemente tienen mayor costo de salida y menor churn. Necesita confirmación de María sobre la regla de negocio. Técnicamente implementable en un día de trabajo una vez que tiene la regla.
+
+**2.T.2.2 Campo motivo_texto**
+Se puede automatizar con heurística por palabras clave + clustering TF-IDF. Exploración rápida previa: el 80% de los registros cae en 8 categorías naturales; el 20% restante se etiqueta como 'otros'. Estimación: 3 días de trabajo (1 día exploración/definición de categorías, 1 día implementación, 1 día validación con alguien del call center). No requiere intervención manual masiva.
+
+**2.T.2.3 Laguna de 6 semanas**
+Recomienda imputar con la mediana del cliente en los 3 meses anteriores y 3 meses posteriores a la laguna (más robusto que promedio simple por consumo estacional). Impacto en el modelo: bajo. No crítico.
+
+**2.T.2.4 Suficiencia de datos para recall ≥ 70%**
+Evaluación preliminar: sí, pero con condición — necesita confirmar suficientes ejemplos de clientes que cancelaron. Con 7% churn mensual sobre 50,000 clientes, deberían haber 3,000-4,000 cancelaciones por mes en los últimos 12 meses — volumen adecuado para entrenar un clasificador. Si el desbalance de clases es no más de 10:1, recall ≥ 70% es alcanzable con gradient boosting y técnicas estándar de balanceo. No puede garantizarlo sin exploración formal, pero el panorama es favorable.
+
+**Informante:** Carlos Méndez (TECNICO)
 
 ---
 
-### 2.T.3 Acceso y restricciones técnicas [PENDIENTE]
+### 2.T.3 Acceso y restricciones técnicas [COMPLETADO 2026-05-14 21:45]
+
+**Pregunta:** ¿Cuáles son las restricciones técnicas para acceder a los datos? ¿Hay limitaciones de infraestructura, permisos de base de datos, conectividad entre sistemas o complejidad de ETL que debamos considerar?
+
+**Respuesta:**
+
+**2.T.3.1 Linked server y acceso a datos de uso**
+El linked server existe pero está configurado solo para consultas puntuales ad-hoc — nunca se ha usado para ETL automatizado nocturno. Técnicamente funciona, pero necesita que TI lo revise y garantice estabilidad para ejecución desatendida. Roberto Vargas debe autorizar formalmente. Gestión puede tomar 1 a 2 semanas si se solicita pronto.
+
+**2.T.3.2 Permisos de lectura actuales**
+- Facturación y uso del servicio: acceso completo (parte de su trabajo habitual)
+- CRM: acceso de lectura a tbl_clientes pero NO a tbl_lineas ni a tablas de historial de cambios de plan (también necesarias)
+- Call center: sin acceso en absoluto — bajo esquema de Operaciones, necesita autorización de Patricia Solano
+
+Son dos gestiones de acceso pendientes que debemos iniciar de inmediato para no bloquear el timeline.
+
+**2.T.3.3 Complejidades técnicas adicionales en el ETL**
+1. Las tablas de facturación y uso no tienen campo id_cliente común directo — el join se hace por número de línea (se complica con clientes multilinea). Necesita construir una tabla puente.
+2. El servidor de uso del servicio está en una zona de red diferente con latencia alta — queries entre servidores pueden ser lentas; necesita optimizarlas con vistas materializadas o tablas staging.
+3. No hay entorno de desarrollo separado — tendrá que trabajar directamente sobre producción con permisos de solo lectura, lo que limita las opciones de prueba del ETL.
+
+**2.T.3.4 Ventana de 4 horas y ejecución desatendida**
+Para el proceso maduro sí — ETL completo tomará 90-120 minutos una vez optimizado. Durante desarrollo puede tomar más. Recomienda reservar ventana completa de 01:00 a 05:00. Si las queries entre servidores resultan lentas, podría necesitar estrategia de extracción incremental en lugar de full refresh — evaluará en fase de exploración.
+
+**Informante:** Carlos Méndez (TECNICO)
 
 ---
 
