@@ -7,3 +7,9 @@
 [2026-05-14 00:15] doc_orchestrator: su_sprint_contract.md no existía. Creado en governance/su/su_sprint_contract.md via template (auto-reparación). Principio 5 satisfecho.
 [2026-05-14 00:15] doc_orchestrator: todos los prerrequisitos del Paso 0 completados. Iniciando Fase 1 — su_interviewer (Fase 0 + Fase 1).
 [2026-05-14 10:00] doc_orchestrator: ACTUALIZACIÓN DE INFRAESTRUCTURA — git init ejecutado por operador. Repositorio git ahora disponible. Remote origin configurado: https://github.com/jdrodriguez1000/Simulacion_001.git. Variables de sesión actualizadas: git_available=true, github_remote_configured=true. Modo local desactivado — commits y push habilitados desde este punto.
+[2026-05-14 10:01] doc_orchestrator: commit inicial ejecutado (hash: 0567884) — 17 archivos, todos los artefactos de governance/ + proyecto. Push a origin: ok — master -> origin/master (nuevo branch). Regla PUSH-1 satisfecha.
+[2026-05-14 00:20] su_interviewer: Fase 0 completada. Stakeholders mapeados: SPONSOR=María González, TECNICO=Carlos Méndez/disponible=S, USUARIO=Laura Ríos/disponible=S
+[2026-05-14 00:20] su_interviewer: Iniciando Fase 1 — Exploración del problema. Presentando sección 1.1 al SPONSOR (María González).
+[2026-05-14 14:32] su_interviewer: Fase 1 completada — 5 secciones (1.1 a 1.5), informante: María González (SPONSOR). Registro en su_interview.md actualizado. Iniciando Fase 2.
+[2026-05-14 20:45] su_interviewer: Fase 2 con SPONSOR completada — secciones 2.1 a 2.8 registradas en su_interview.md. Informante: María González. Próxima fase: Fase 2.T (entrevista técnica con Carlos Méndez).
+[2026-05-14 21:30] su_interviewer: Fase 2.T iniciada. Sección 2.T.1 (Estructura y volumen de datos) completada con respuestas de Carlos Méndez (TECNICO). Hallazgo crítico: Datos de uso del servicio en servidor SQL separado — requiere linked server. Iniciando sección 2.T.2.
