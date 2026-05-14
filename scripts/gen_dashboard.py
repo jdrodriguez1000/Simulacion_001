@@ -55,20 +55,24 @@ def parse_dimension_scores(review_text):
         return []
     scores = []
     in_rubric = False
-    row_re = re.compile(r'\|\s*(.+?)\s*\|\s*(\d+\.?\d*)\s*\|')
+    # Matches rows with 4 cols: | # | Dimension | Score | Observations |
+    row_4_re = re.compile(r'^\|\s*\d+\s*\|\s*(.+?)\s*\|\s*(\d+\.?\d*)\s*\|')
+    # Fallback: 2-col rows | Dimension | Score |
+    row_2_re = re.compile(r'^\|\s*(.+?)\s*\|\s*(\d+\.?\d*)\s*\|')
+    SKIP = {"Dimensión", "Dimension", "#", "---", "-"}
     for line in review_text.splitlines():
-        if "Rúbrica de evaluación" in line or "Rubrica de evaluacion" in line:
+        if re.search(r'[Rr][uú]brica', line):
             in_rubric = True
             continue
         if not in_rubric:
             continue
         if not line.startswith("|"):
             continue
-        m = row_re.match(line)
+        m = row_4_re.match(line) or row_2_re.match(line)
         if not m:
             continue
         dim = m.group(1).strip()
-        if dim in ("Dimensión", "---", "Dimension", "-"):
+        if dim in SKIP or dim.startswith("-"):
             continue
         try:
             score = float(m.group(2))
@@ -101,12 +105,27 @@ DOC_LABELS = {
 }
 DOC_ORDER = ["su", "brd", "bdd", "sad", "specdd", "feasibility", "backlog"]
 
+PHASE_LABELS = {
+    "fase_0_stakeholders":                     "Fase 0 — Mapeo de stakeholders",
+    "fase_1_secciones_1.1_a_1.5":              "Fase 1 — Exploración del problema (1.1–1.5)",
+    "fase_2_sponsor_secciones_2.1_a_2.8":      "Fase 2 Sponsor — Confirmación y cierre (2.1–2.8)",
+    "fase_2T_tecnico_secciones_2.T.1_a_2.T.3": "Fase 2T Técnico — Restricciones técnicas (2.T.1–2.T.3)",
+    "fase_2U_usuario_secciones_2.U.1_a_2.U.2": "Fase 2U Usuario — Flujo y usabilidad (2.U.1–2.U.2)",
+    "needs_analysis":                          "Análisis de necesidades (su_needs_analyzer)",
+    "synthesis_v1":                            "Síntesis — Draft v1 generado",
+    "evaluation_v1":                           "Evaluación automática — Draft v1",
+    "audit_v1":                                "Auditoría independiente — Draft v1",
+    "stakeholder_approval":                    "Aprobación del stakeholder",
+}
+
 
 def build_pipeline(gov_state):
-    documents = gov_state.get("documents", {})
+    documents = {k: v for k, v in gov_state.items() if k in DOC_ORDER}
     pipeline = []
     for doc_id in DOC_ORDER:
         doc = documents.get(doc_id, {"status": "pending"})
+        raw_phases = doc.get("completed_phases", [])
+        phases = [{"id": p, "label": PHASE_LABELS.get(p, p)} for p in raw_phases]
         pipeline.append({
             "id": doc_id,
             "label": DOC_LABELS[doc_id],
@@ -119,12 +138,13 @@ def build_pipeline(gov_state):
             "gaps_criticos": doc.get("gaps_criticos", 0),
             "gaps_menores": doc.get("gaps_menores", 0),
             "needs_analyzer_confidence": doc.get("needs_analyzer_confidence"),
+            "completed_phases": phases,
         })
     return pipeline
 
 
 def compute_metrics(gov_state, log_events, catalog):
-    documents = gov_state.get("documents", {})
+    documents = {k: v for k, v in gov_state.items() if k in DOC_ORDER}
     approved_docs = [d for d in documents.values() if d.get("status") == "approved"]
     non_pending = [d for d in documents.values() if d.get("status") != "pending"]
 
@@ -187,7 +207,7 @@ def compute_metrics(gov_state, log_events, catalog):
 
 
 def build_scores(gov_state, review_text):
-    documents = gov_state.get("documents", {})
+    documents = {k: v for k, v in gov_state.items() if k in DOC_ORDER}
     su_doc = documents.get("su", {})
     scores = []
 
@@ -385,6 +405,15 @@ a{color:inherit;text-decoration:none}
 .artifact-content pre{font-family:"Menlo","Consolas","Courier New",monospace;font-size:.75rem;line-height:1.6;color:#1e293b;white-space:pre-wrap;word-break:break-word}
 .artifact-empty{padding:3rem;text-align:center;color:#94a3b8;font-size:.85rem}
 
+/* ── Phases ── */
+.phases-section{margin-top:1.5rem}
+.phases-doc-title{font-size:.82rem;font-weight:700;color:#475569;margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
+.phases-doc-title .phase-doc-badge{font-size:.65rem;font-weight:700;text-transform:uppercase;padding:.15rem .5rem;border-radius:4px}
+.phases-list{display:flex;flex-direction:column;gap:.4rem;padding-left:.25rem}
+.phase-row{display:flex;align-items:center;gap:.65rem;padding:.45rem .75rem;background:#fff;border-radius:8px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.phase-icon{font-size:.85rem;flex-shrink:0}
+.phase-label{font-size:.82rem;color:#1e293b}
+
 /* ── Footer ── */
 footer{max-width:960px;margin:2rem auto 0;padding:0 1rem;display:flex;justify-content:space-between;font-size:.73rem;color:#94a3b8;flex-wrap:wrap;gap:.5rem}
 </style>
@@ -550,6 +579,45 @@ function statusBadgeHtml(status) {
       <span class="doc-status-chip ${chipMap[doc.status]||'chip-pending'}">${labelMap[doc.status]||doc.status}</span>
     </div>`;
   }).join('');
+})();
+
+// ── Pipeline phases ───────────────────────────────────────────────────────────
+(function renderPhases() {
+  const pipeline = HARNESS_DATA.pipeline || [];
+  const withPhases = pipeline.filter(d => d.completed_phases && d.completed_phases.length > 0);
+  if (!withPhases.length) return;
+
+  const chipMap = {approved:'chip-approved',in_progress:'chip-in_progress',rejected:'chip-rejected',pending:'chip-pending'};
+  const labelMap = {approved:'Aprobado',in_progress:'En progreso',rejected:'Rechazado',pending:'Pendiente'};
+
+  const container = document.createElement('div');
+  container.className = 'phases-section';
+
+  const sectionLabel = document.createElement('p');
+  sectionLabel.className = 'section-label';
+  sectionLabel.style.marginTop = '1.75rem';
+  sectionLabel.textContent = 'Fases completadas por documento';
+  container.appendChild(sectionLabel);
+
+  withPhases.forEach(doc => {
+    const titleEl = document.createElement('div');
+    titleEl.className = 'phases-doc-title';
+    titleEl.innerHTML = `${esc(doc.label)} <span class="phase-doc-badge ${chipMap[doc.status]||'chip-pending'}">${labelMap[doc.status]||doc.status}</span>`;
+    container.appendChild(titleEl);
+
+    const list = document.createElement('div');
+    list.className = 'phases-list';
+    doc.completed_phases.forEach(ph => {
+      const row = document.createElement('div');
+      row.className = 'phase-row';
+      row.innerHTML = `<span class="phase-icon">✅</span><span class="phase-label">${esc(ph.label)}</span>`;
+      list.appendChild(row);
+    });
+    container.appendChild(list);
+    container.appendChild(Object.assign(document.createElement('div'), {style:'margin-bottom:1rem'}));
+  });
+
+  document.getElementById('tab-pipeline').appendChild(container);
 })();
 
 // ── Timeline ──────────────────────────────────────────────────────────────────
@@ -745,7 +813,7 @@ def main():
     pending        = read_json(root / "governance/pending_prompt_changes.json", [])
     su_review_text = read_text(root / "governance/su/su_review.md")
 
-    log_events = list(reversed(parse_log_events(log_text)))
+    log_events = sorted(parse_log_events(log_text), key=lambda e: e["timestamp"], reverse=True)
     pipeline   = build_pipeline(gov_state)
     metrics    = compute_metrics(gov_state, log_events, catalog)
     scores     = build_scores(gov_state, su_review_text)
