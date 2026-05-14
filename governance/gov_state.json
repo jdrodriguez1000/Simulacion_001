@@ -1,8 +1,9 @@
 {
   "su": {
     "status": "in_progress",
-    "phase": "needs_analysis",
-    "iteration_count": 0,
+    "phase": "evaluator",
+    "current_draft": "governance/su/su_draft_v1.md",
+    "iteration_count": 1,
     "complexity": "high",
     "complexity_signals": [
       "multiples_decision_makers",
@@ -16,17 +17,18 @@
       "fase_1_secciones_1.1_a_1.5",
       "fase_2_sponsor_secciones_2.1_a_2.8",
       "fase_2T_tecnico_secciones_2.T.1_a_2.T.3",
-      "fase_2U_usuario_secciones_2.U.1_a_2.U.2"
+      "fase_2U_usuario_secciones_2.U.1_a_2.U.2",
+      "needs_analysis"
     ],
     "stakeholders_mapeados": [
       {"nombre": "María González", "cargo": "Gerente de Retención de Clientes", "tipo": "SPONSOR", "disponible": true},
       {"nombre": "Carlos Méndez", "cargo": "Científico de Datos Senior", "tipo": "TECNICO", "disponible": true},
       {"nombre": "Laura Ríos", "cargo": "Analista de Retención", "tipo": "USUARIO", "disponible": true}
     ],
-    "needs_analyzer_confidence": null,
-    "needs_analyzer_level": null,
-    "gaps_criticos": null,
-    "gaps_menores": null,
-    "gaps_ausentes": null
+    "needs_analyzer_confidence": 0.91,
+    "needs_analyzer_level": "LISTO",
+    "gaps_criticos": 0,
+    "gaps_menores": 3,
+    "gaps_ausentes": 0
   }
 }
